@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { serverResponseObj } from "./serverResponseObj.js";
 
 // Loads the main .env file
-dotenv.config({});
+dotenv.config();
 
 const server = express();
 
