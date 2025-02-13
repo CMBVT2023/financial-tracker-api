@@ -1,6 +1,10 @@
 import express from "express";
 import cors from 'cors';
+import dotenv from "dotenv";
 import { serverResponseObj } from "./serverResponseObj.js";
+
+// Loads the main .env file
+dotenv.config({});
 
 const server = express();
 
@@ -8,7 +12,7 @@ const server = express();
 server.use(cors());
 
 // Temp placeholder
-const port = 1000;
+const port = process.env.PORT;
 
 // Parse all body data into json
 server.use(express.json())
