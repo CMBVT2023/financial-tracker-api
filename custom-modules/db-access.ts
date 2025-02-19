@@ -16,7 +16,8 @@ const pool = mysql.createPool({
     database: process.env.DB_DATABASE
 })
 
-type RequestWithDataBase = Request & {"db": any};
+// Sets the Request to also include a database property that holds a connection to the project's database.
+export type RequestWithDataBase = Request & {"db": mysql.PoolConnection};
 
 export async function loadDB(req: RequestWithDataBase, res: Response, next: NextFunction) {
     try {
