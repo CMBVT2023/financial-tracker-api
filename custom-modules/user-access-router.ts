@@ -11,7 +11,7 @@ dotenv.config();
 // Initializes a router to handle all endpoints that start with "/user"
 const userRouter = express.Router();
 
-userRouter.get(
+userRouter.post(
   "/login",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -65,7 +65,7 @@ userRouter.get(
   }
 );
 
-userRouter.get(
+userRouter.post(
   "/register",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
