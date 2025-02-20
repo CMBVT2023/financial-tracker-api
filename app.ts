@@ -35,5 +35,5 @@ server.get("/test", (req, res) => {
 server.use("/user", userRouter);
 
 server.listen(port, () => {
-  console.log(`Sever listening on port https://localhost:${port}.`);
+  console.log(`Sever listening on port http://localhost:${port}.`);
 });

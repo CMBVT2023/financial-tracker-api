@@ -50,7 +50,7 @@ userRouter.post(
 
       res
         .status(200)
-        .json(serverResponseObj(true, "connected", { jwt: jwtEncodedUser }));
+        .json(serverResponseObj(true, "User successfully signed in.", { jwt: jwtEncodedUser }));
     } catch (error: any & { message: string }) {
       // Logs any error to the console and sends a 500 status to indicate an error on the server's end.
       console.log(error);
@@ -98,7 +98,7 @@ userRouter.post(
 
       res
         .status(200)
-        .json(serverResponseObj(true, "connected", { jwt: jwtSignedUser }));
+        .json(serverResponseObj(true, "User successfully registered.", { jwt: jwtSignedUser }));
     } catch (error: any & { message: string }) {
       // Logs any error to the console and sends a 500 status to indicate an error on the server's end.
       console.log(error);
