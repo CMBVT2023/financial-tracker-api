@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-import { serverResponseObj } from "./serverResponseObj.js";
+import { newServerResponseObj } from "./serverResponseObj.js";
 import type { Request, Response, NextFunction } from "express";
 
 dotenv.config();
@@ -50,17 +50,17 @@ userRouter.post(
 
       res
         .status(200)
-        .json(serverResponseObj(true, "User successfully signed in.", { jwt: jwtEncodedUser }));
+        .json(newServerResponseObj(true, "User successfully signed in.", { jwt: jwtEncodedUser }));
     } catch (error: any & { message: string }) {
       // Logs any error to the console and sends a 500 status to indicate an error on the server's end.
       console.log(error);
 
       if (error?.message === "Username or password is incorrect.") {
-        res.status(300).send(serverResponseObj(false, error?.message, ""));
+        res.status(300).send(newServerResponseObj(false, error?.message, ""));
         return;
       }
 
-      res.status(500).send(serverResponseObj(false, error?.message, ""));
+      res.status(500).send(newServerResponseObj(false, error?.message, ""));
     }
   }
 );

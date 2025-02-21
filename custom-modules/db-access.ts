@@ -1,7 +1,7 @@
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 import type { Request, Response, NextFunction } from "express";
-import { serverResponseObj } from "./serverResponseObj.js";
+import { newServerResponseObj } from "./serverResponseObj.js";
 
 dotenv.config();
 
@@ -40,6 +40,6 @@ export async function loadDB(req: Request, res: Response, next: NextFunction) {
     console.log(error);
     // Also, if necessary, releases the database if it was successfully mounted.
     if (res.locals.db) res.locals.db.release();
-    res.status(500).send(serverResponseObj(false, error?.message, ""));
+    res.status(500).send(newServerResponseObj(false, error?.message, ""));
   }
 }

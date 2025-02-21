@@ -5,7 +5,7 @@ export type ServerResponseObj = {
   transferData: any;
 };
 
-export function serverResponseObj(
+export function newServerResponseObj(
   isSuccess: boolean,
   transferMessage: string,
   transferData: any

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { serverResponseObj } from "./custom-modules/serverResponseObj.js";
+import { newServerResponseObj } from "./custom-modules/serverResponseObj.js";
 import userRouter from "./custom-modules/user-access-router.js";
 
 import { loadDB } from "./custom-modules/db-access.js";
@@ -29,7 +29,7 @@ server.use(loadDB);
 
 server.get("/test", (req, res) => {
   console.log("Connection made...");
-  res.status(200).json(serverResponseObj(true, "Connection made...", "none"));
+  res.status(200).json(newServerResponseObj(true, "Connection made...", "none"));
 });
 
 server.use("/user", userRouter);
