@@ -13,6 +13,7 @@ financialEntryRouter.get(
   "/all-financial-entries",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const { userID, user_name } = res.locals.user;
       const [financialEntries] = await res.locals.db.query(
         `SELECT * FROM financial_entries WHERE user_id = :userID AND delete_flag IS Null`,
         {
@@ -25,7 +26,7 @@ financialEntryRouter.get(
         .json(
           newServerResponseObj(
             true,
-            "Gathered all user's financial entries.",
+            `Gathered all ${user_name}'s financial entries.`,
             financialEntries
           )
         );
@@ -116,7 +117,15 @@ financialEntryRouter.put(
         }
       );
 
-      res.status(200).json(newServerResponseObj(true, `Successfully updated financial entry in ${user_name}'s financial table`, ''));
+      res
+        .status(200)
+        .json(
+          newServerResponseObj(
+            true,
+            `Successfully updated financial entry in ${user_name}'s financial table`,
+            ""
+          )
+        );
     } catch (error: any & { message: string }) {
       // Logs any error to the console and sends a 500 status to indicate an error on the server's end.
       console.log(error);
@@ -139,11 +148,19 @@ financialEntryRouter.delete(
         `,
         {
           entryID,
-          userID
+          userID,
         }
-      )
+      );
 
-      res.status(200).json(newServerResponseObj(true, `Successfully deleted item entry from ${user_name}'s financial table.`, ''))
+      res
+        .status(200)
+        .json(
+          newServerResponseObj(
+            true,
+            `Successfully deleted item entry from ${user_name}'s financial table.`,
+            ""
+          )
+        );
     } catch (error: any & { message: string }) {
       // Logs any error to the console and sends a 500 status to indicate an error on the server's end.
       console.log(error);
