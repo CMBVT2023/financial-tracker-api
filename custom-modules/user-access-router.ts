@@ -98,17 +98,17 @@ userRouter.post(
 
       res
         .status(200)
-        .json(serverResponseObj(true, "User successfully registered.", { jwt: jwtSignedUser }));
+        .json(newServerResponseObj(true, "User successfully registered.", { jwt: jwtSignedUser }));
     } catch (error: any & { message: string }) {
       // Logs any error to the console and sends a 500 status to indicate an error on the server's end.
       console.log(error);
 
       if (error?.message === "Username or password is incorrect.") {
-        res.status(300).send(serverResponseObj(false, error?.message, ""));
+        res.status(300).send(newServerResponseObj(false, error?.message, ""));
         return;
       }
 
-      res.status(500).send(serverResponseObj(false, error?.message, ""));
+      res.status(500).send(newServerResponseObj(false, error?.message, ""));
     }
   }
 );
