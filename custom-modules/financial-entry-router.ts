@@ -1,7 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 
 import { newServerResponseObj } from "./serverResponseObj.js";
 import type { Request, Response, NextFunction } from "express";
@@ -12,9 +10,17 @@ dotenv.config();
 const financialEntryRouter = express.Router();
 
 financialEntryRouter.get(
-  "/allFinancialEntries",
+  "/all-financial-entries",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const [financialEntries] = await res.locals.db.query(
+        `SELECT * FROM financial_entries WHERE user_id = :userID AND delete_flag IS NOT Null`,
+        {
+          userID: res.locals.user.id,
+        }
+      );
+
+      res.status(200).json(newServerResponseObj(true, "Gathered all user's financial entries.", financialEntries));
     } catch (error: any & { message: string }) {
       // Logs any error to the console and sends a 500 status to indicate an error on the server's end.
       console.log(error);
@@ -27,6 +33,7 @@ financialEntryRouter.post(
   "/add-financial-entry",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      
     } catch (error: any & { message: string }) {
       // Logs any error to the console and sends a 500 status to indicate an error on the server's end.
       console.log(error);

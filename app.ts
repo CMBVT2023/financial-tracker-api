@@ -7,6 +7,7 @@ import financialEntryRouter from "./custom-modules/financial-entry-router.js";
 import { loadDB } from "./custom-modules/db-access.js";
 
 import type { Request, Response, NextFunction } from "express";
+import { validateUserSession } from "./custom-modules/user-validation.js";
 
 // Loads the main .env file
 dotenv.config();
@@ -36,7 +37,7 @@ server.get("/test", (req, res) => {
 
 server.use("/user", userRouter);
 
-server.use("/entries", financialEntryRouter);
+server.use("/entries", validateUserSession, financialEntryRouter);
 
 server.listen(port, () => {
   console.log(`Sever listening on port http://localhost:${port}.`);
