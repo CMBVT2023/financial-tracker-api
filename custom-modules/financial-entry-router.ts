@@ -27,7 +27,7 @@ financialEntryRouter.get(
           newServerResponseObj(
             true,
             `Gathered all ${user_name}'s financial entries.`,
-            financialEntries
+            {entriesArray: financialEntries}
           )
         );
     } catch (error: any & { message: string }) {
