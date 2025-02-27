@@ -48,18 +48,20 @@ financialEntryRouter.post(
         itemName,
         itemCost,
         purchasedFrom,
+        entryDate,
         itemQuantity,
         itemManufacturer,
       } = req.body;
       const { id: userID, user_name } = res.locals.user;
 
       const query = await res.locals.db.query(
-        `INSERT INTO financial_entries (item_name, item_cost, purchased_from, user_id, item_quantity, manufacturer)
-         VALUES (:itemName, :itemCost, :purchasedFrom, :userID, :itemQuantity, :itemManufacturer)`,
+        `INSERT INTO financial_entries (item_name, item_cost, purchased_from, entry_date, user_id, item_quantity, manufacturer)
+         VALUES (:itemName, :itemCost, :purchasedFrom, :entryDate, :userID, :itemQuantity, :itemManufacturer)`,
         {
           itemName,
           itemCost,
           purchasedFrom,
+          entryDate,
           userID,
           itemQuantity,
           itemManufacturer,
@@ -91,6 +93,7 @@ financialEntryRouter.put(
         newItemName,
         newItemCost,
         newPurchasedFrom,
+        newEntryDate,
         newItemQuantity,
         newItemManufacturer,
         entryID,
@@ -102,6 +105,7 @@ financialEntryRouter.put(
         item_name = :newItemName, 
         item_cost = :newItemCost, 
         purchased_from = :newPurchasedFrom, 
+        entry_date = newEntryDate,
         item_quantity = :newItemQuantity, 
         manufacturer = :newItemManufacturer 
         WHERE entry_id = :entryID AND user_id = :userID AND delete_flag IS NULL
@@ -110,6 +114,7 @@ financialEntryRouter.put(
           newItemName,
           newItemCost,
           newPurchasedFrom,
+          newEntryDate,
           newItemQuantity,
           newItemManufacturer,
           entryID,
