@@ -105,7 +105,7 @@ financialEntryRouter.put(
         item_name = :newItemName, 
         item_cost = :newItemCost, 
         purchased_from = :newPurchasedFrom, 
-        entry_date = newEntryDate,
+        entry_date = :newEntryDate,
         item_quantity = :newItemQuantity, 
         manufacturer = :newItemManufacturer 
         WHERE entry_id = :entryID AND user_id = :userID AND delete_flag IS NULL
