@@ -23,9 +23,6 @@ server.use(express.json());
 // Temp placeholder
 const port = process.env.PORT;
 
-// Parse all body data into json
-server.use(express.json());
-
 server.use(loadDB);
 
 server.get("/test", (req, res) => {
